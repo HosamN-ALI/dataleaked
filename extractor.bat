@@ -59,6 +59,10 @@ for /f "delims=" %%f in (%filesList%) do (
         :keyword_next
     )
     
+    REM Compress the extracted folder into a ZIP file
+    echo Compressing extracted folder %%~nf to ZIP
+    "%7zPath%" a "%outputDir%\%%~nf.zip" "%outputDir%\%%~nf\*"
+    
     REM Delete the processed RAR file and extracted folder
     echo Deleting processed RAR file %%f
     del "%%f"
@@ -66,6 +70,6 @@ for /f "delims=" %%f in (%filesList%) do (
     rmdir /s /q "%outputDir%\%%~nf"
 )
 
-echo Extraction process completed.
+echo Extraction and compression process completed.
 endlocal
 pause
